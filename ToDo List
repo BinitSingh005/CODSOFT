@@ -1,0 +1,94 @@
+class ToDoList:
+    def __init__(self):
+        self.tasks = {}
+
+    def create_task(self):
+        task_name = input("Enter task name: ")
+        task_description = input("Enter task description: ")
+        task_due_date = input("Enter task due date (YYYY-MM-DD): ")
+        task_status = "Not Started"
+
+        self.tasks[task_name] = {
+            "description": task_description,
+            "due_date": task_due_date,
+            "status": task_status
+        }
+
+        print(f"Task '{task_name}' created successfully.")
+
+    def update_task(self):
+        task_name = input("Enter task name: ")
+
+        if task_name in self.tasks:
+            print("Enter the field you want to update:")
+            print("1. Description")
+            print("2. Due Date")
+            print("3. Status")
+
+            choice = input("Enter your choice (1/2/3): ")
+
+            if choice == "1":
+                new_description = input("Enter new description: ")
+                self.tasks[task_name]["description"] = new_description
+            elif choice == "2":
+                new_due_date = input("Enter new due date (YYYY-MM-DD): ")
+                self.tasks[task_name]["due_date"] = new_due_date
+            elif choice == "3":
+                new_status = input("Enter new status: ")
+                self.tasks[task_name]["status"] = new_status
+            else:
+                print("Invalid choice.")
+
+            print(f"Task '{task_name}' updated successfully.")
+        else:
+            print(f"Task '{task_name}' not found.")
+
+    def track_task(self):
+        task_name = input("Enter task name: ")
+
+        if task_name in self.tasks:
+            print(f"Task Name: {task_name}")
+            print(f"Description: {self.tasks[task_name]['description']}")
+            print(f"Due Date: {self.tasks[task_name]['due_date']}")
+            print(f"Status: {self.tasks[task_name]['status']}")
+        else:
+            print(f"Task '{task_name}' not found.")
+
+    def display_tasks(self):
+        if self.tasks:
+            for task_name, task_details in self.tasks.items():
+                print(f"Task Name: {task_name}")
+                print(f"Description: {task_details['description']}")
+                print(f"Due Date: {task_details['due_date']}")
+                print(f"Status: {task_details['status']}")
+                print("-" * 50)
+        else:
+            print("No tasks available.")
+
+def main():
+    todo_list = ToDoList()
+
+    while True:
+        print("To-Do List Menu:")
+        print("1. Create Task")
+        print("2. Update Task")
+        print("3. Track Task")
+        print("4. Display Tasks")
+        print("5. Quit")
+
+        choice = input("Enter your choice (1/2/3/4/5): ")
+
+        if choice == "1":
+            todo_list.create_task()
+        elif choice == "2":
+            todo_list.update_task()
+        elif choice == "3":
+            todo_list.track_task()
+        elif choice == "4":
+            todo_list.display_tasks()
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice. Please choose again.")
+
+main()
